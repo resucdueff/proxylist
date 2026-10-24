@@ -65,3 +65,95 @@ git diff ai/                  # 检查变化后提交
 ```
 
 想加域名改 `ai/extra.txt`，想去掉某条改 `ai/exclude.txt`，然后重新运行脚本。
+
+## apple-ai：Apple 智能（Apple Intelligence）
+
+让 Apple 智能（含 ChatGPT 扩展、私有云计算）在大陆网络下可用所需的最少域名，共 6 条，手工维护（不参与每周自动生成）。
+
+### 规则地址
+
+| 格式 | 地址 |
+| --- | --- |
+| YAML（`format: yaml`） | https://raw.githubusercontent.com/resucdueff/proxylist/main/apple-ai/apple-ai.yaml |
+| 纯文本（`format: text`） | https://raw.githubusercontent.com/resucdueff/proxylist/main/apple-ai/apple-ai.list |
+
+| 规则 | 作用 |
+| --- | --- |
+| `DOMAIN,gspe1-ssl.ls.apple.com` | 按出口 IP 判断地区，ChatGPT 扩展依赖；走代理后地图等也会变成海外版 |
+| `DOMAIN,apple-relay.apple.com` | ChatGPT 扩展中继 |
+| `DOMAIN,apple-relay.cloudflare.com` | 私有云计算中继 |
+| `DOMAIN,apple-relay.fastly-edge.com` | 私有云计算中继 |
+| `DOMAIN,cp4.cloudflare.com` | 私有云计算 |
+| `DOMAIN,apple-relay.mask.apple-dns.net` | 中继入口 |
+
+### 使用前提
+
+- **国行设备（型号含 CH/A）无论怎么配置都用不了**，与代理无关。
+- 使用非中国大陆地区的 Apple ID，设备语言与 Siri 语言一致且为 Apple 智能支持的语言。
+- 代理节点必须在 ChatGPT 支持的地区（**不能用香港**，推荐美国 / 日本 / 新加坡），并且支持 **UDP**（私有云计算中继走 QUIC）。
+- mihomo 需开启 **TUN** 和 **sniffer（域名嗅探）**，否则设备直接按 IP 连接时匹配不到域名规则。
+- 可选：Siri 走代理可手动加 `DOMAIN,guzzoni.apple.com`（未放进规则文件，按需自行添加）。
+
+### mihomo 配置示例
+
+注意规则顺序：`apple-ai` 必须在 Apple 直连规则和 `GEOIP,CN` **之前**。
+
+```yaml
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-detect-interface: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP: {ports: [80, 8080-8880], override-destination: true}
+    TLS: {ports: [443, 8443]}
+    QUIC: {ports: [443, 8443]}
+
+rule-providers:
+  apple-ai:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/resucdueff/proxylist/main/apple-ai/apple-ai.yaml
+    path: ./ruleset/apple-ai.yaml
+    interval: 86400
+  ai:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/resucdueff/proxylist/main/ai/ai.yaml
+    path: ./ruleset/ai.yaml
+    interval: 86400
+
+proxy-groups:
+  - name: AI
+    type: select
+    proxies: [美国节点, 日本节点, 新加坡节点]   # 换成你自己的节点，不要选香港
+
+rules:
+  - RULE-SET,apple-ai,AI
+  - RULE-SET,ai,AI
+  # 其余 Apple 服务直连
+  - DOMAIN-SUFFIX,push.apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud.com,DIRECT
+  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+  - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,ls.apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com.cn,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT
+  # ... 其他规则
+  - MATCH,DIRECT
+```
+
+### 来源
+
+- Apple 支持文档 [101555](https://support.apple.com/zh-cn/101555)（在企业网络中使用 Apple 产品）
+- [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) `apple-intelligence`（MetaCubeX geosite `apple-intelligence`）
+- [SukkaW/Surge](https://github.com/SukkaW/Surge) `apple_intelligence`

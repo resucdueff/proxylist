@@ -1,0 +1,22 @@
+# 名称: apple-ai（Apple 智能 / Apple Intelligence）
+# 更新时间: 2026-10-24 21:53:34 (Asia/Shanghai, UTC+8)
+# 规则数: 6
+# 仓库: https://github.com/resucdueff/proxylist
+# 维护方式: 手工整理，不参与 scripts/build_ai.py 自动合并
+# 来源:
+#   - Apple 支持文档 101555（企业网络中使用 Apple 产品）: https://support.apple.com/zh-cn/101555
+#   - v2fly/domain-list-community data/apple-intelligence（MetaCubeX geosite apple-intelligence）: https://github.com/v2fly/domain-list-community/blob/master/data/apple-intelligence
+#   - SukkaW/Surge apple_intelligence: https://github.com/SukkaW/Surge
+# 说明: 国行（型号含 CH/A）设备无论如何都无法使用 Apple 智能；详见 README
+# 按出口 IP 判断地区，ChatGPT 扩展依赖；会让地图等变海外版
+DOMAIN,gspe1-ssl.ls.apple.com
+# ChatGPT 扩展中继
+DOMAIN,apple-relay.apple.com
+# 私有云计算中继
+DOMAIN,apple-relay.cloudflare.com
+# 私有云计算中继
+DOMAIN,apple-relay.fastly-edge.com
+# 私有云计算
+DOMAIN,cp4.cloudflare.com
+# 中继入口
+DOMAIN,apple-relay.mask.apple-dns.net
