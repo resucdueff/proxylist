@@ -1,0 +1,132 @@
+# 手工补充的境外 AI 服务规则（格式：TYPE,value；支持 DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
+# 共享大域名只写具体子域名，不要整个 google.com / microsoft.com
+
+# OpenAI / ChatGPT / Sora
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN-KEYWORD,openai
+
+# Anthropic / Claude
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-KEYWORD,anthropic
+
+# Google Gemini / AI Studio / NotebookLM / Labs / DeepMind / Vertex AI
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,ai.studio
+DOMAIN,ai.google.dev
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,aiplatform.googleapis.com
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN-SUFFIX,labs.google
+DOMAIN-SUFFIX,labs.google.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,jules.google
+DOMAIN-SUFFIX,antigravity.google
+DOMAIN-SUFFIX,stitch.withgoogle.com
+
+# xAI / Grok
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,grok.x.com
+
+# Microsoft Copilot / Bing Chat / Azure AI
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN-SUFFIX,copilot.com
+DOMAIN,sydney.bing.com
+DOMAIN-SUFFIX,edgeservices.bing.com
+DOMAIN-SUFFIX,ai.azure.com
+DOMAIN-SUFFIX,openai.azure.com
+
+# GitHub Copilot
+DOMAIN-SUFFIX,githubcopilot.com
+DOMAIN,copilot-proxy.githubusercontent.com
+DOMAIN,copilot-telemetry.githubusercontent.com
+DOMAIN,copilot-telemetry-service.githubusercontent.com
+DOMAIN,copilot-workspace.githubnext.com
+
+# Meta AI
+DOMAIN-SUFFIX,meta.ai
+
+# Perplexity
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,perplexity.com
+DOMAIN-SUFFIX,pplx.ai
+
+# Mistral / Cohere / AI21 / Inflection
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,ai21.com
+DOMAIN-SUFFIX,pi.ai
+
+# Hugging Face
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.co
+DOMAIN-SUFFIX,hf.space
+
+# Poe / Character.AI / You.com / Phind
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,poecdn.net
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,c.ai
+DOMAIN-SUFFIX,you.com
+DOMAIN-SUFFIX,phind.com
+
+# 图像 / 视频生成
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,dreamstudio.ai
+DOMAIN-SUFFIX,runwayml.com
+DOMAIN-SUFFIX,pika.art
+DOMAIN-SUFFIX,lumalabs.ai
+DOMAIN-SUFFIX,ideogram.ai
+DOMAIN-SUFFIX,leonardo.ai
+DOMAIN-SUFFIX,krea.ai
+DOMAIN-SUFFIX,civitai.com
+DOMAIN-SUFFIX,heygen.com
+DOMAIN-SUFFIX,synthesia.io
+DOMAIN-SUFFIX,clipdrop.co
+DOMAIN-SUFFIX,openart.ai
+
+# 语音 / 音乐
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,elevenlabs.com
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,udio.com
+
+# 编程助手
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorapi.com
+DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,codeium.com
+
+# 推理 / API 平台
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,replicate.delivery
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,together.xyz
+DOMAIN-SUFFIX,groq.com
+DOMAIN-SUFFIX,fireworks.ai
+DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,deepinfra.com
+DOMAIN-SUFFIX,cerebras.ai
+
+# 写作 / 翻译 / 办公
+DOMAIN-SUFFIX,deepl.com
+DOMAIN-SUFFIX,jasper.ai
+DOMAIN-SUFFIX,gamma.app

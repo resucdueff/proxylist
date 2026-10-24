@@ -1,0 +1,81 @@
+# 排除列表：上游里出现但不应进入本规则集的条目
+#   example.com    只排除值完全等于 example.com 的规则
+#   +.example.com  排除 example.com 及其所有子域名
+#   KEYWORD:xxx    排除 DOMAIN-KEYWORD,xxx
+
+# ---- 中国大陆 AI 服务（国内直连，不走代理）----
++.deepseek.com
++.kimi.com
++.kimi.ai
++.moonshot.cn
++.moonshot.ai
++.doubao.com
++.qwen.ai
++.tongyi.aliyun.com
++.qianwen.aliyun.com
++.zhipuai.cn
++.chatglm.cn
++.bigmodel.cn
++.minimaxi.com
++.hailuoai.com
++.kling.kuaishou.com
++.klingai.kuaishou.com
++.yiyan.baidu.com
++.xinghuo.xfyun.cn
+
+# ---- 非 AI 专用的通用服务 / CDN / 统计 / 支付（被多数普通网站共用）----
+# 注意：google.com / googleapis.com / microsoft.com / bing.com 等只排除"整个域名"规则，其下 AI 专用子域名（如 gemini.google.com）保留
+google.com
+googleapis.com
+apis.google.com
+microsoft.com
+cloudflare.com
+static.cloudflareinsights.com
+challenges.cloudflare.com
++.auth0.com
++.stripe.com
+sentry.io
++.segment.io
++.intercom.io
++.intercomcdn.com
++.algolia.net
++.launchdarkly.com
++.identrust.com
++.observeit.net
++.featuregates.org
++.statsigapi.net
+api.statsig.com
++.datadoghq.com
+browser-intake-datadoghq.com
+client-api.arkoselabs.com
++.msn.com
+bing.com
+r.bing.com
+www.bing.com
+services.bingapis.com
++.microsoftapp.net
+api.microsoftapp.net
+gateway.bingviz.microsoft.net
+gateway.bingviz.microsoftapp.net
+bing-shopping.microsoft-falcon.io
+in.appcenter.ms
+location.microsoft.com
+odc.officeapps.live.com
+self.events.data.microsoft.com
++.envato.com
++.envato-static.com
++.envatousercontent.com
++.themeforest.net
++.liveperson.net
++.lpsnmedia.net
+
+# ---- 过宽的关键字 ----
+KEYWORD:claude
+KEYWORD:colab
+KEYWORD:developerprofiles
+KEYWORD:generativelanguage
+KEYWORD:openaicom-api
+
+# ---- 上游误收录 / 非 AI 专用 ----
+cdn.usefathom.com
++.muse.ai
