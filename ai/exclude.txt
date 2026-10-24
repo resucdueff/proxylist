@@ -3,14 +3,11 @@
 #   +.example.com  排除 example.com 及其所有子域名
 #   KEYWORD:xxx    排除 DOMAIN-KEYWORD,xxx
 
-# ---- 中国大陆 AI 服务（国内直连，不走代理）----
+# ---- 仅大陆站（国内直连，不走代理；同一域名海内外共用的也放这里，如 kimi.com、deepseek.com）----
 +.deepseek.com
 +.kimi.com
-+.kimi.ai
 +.moonshot.cn
-+.moonshot.ai
 +.doubao.com
-+.qwen.ai
 +.tongyi.aliyun.com
 +.qianwen.aliyun.com
 +.zhipuai.cn

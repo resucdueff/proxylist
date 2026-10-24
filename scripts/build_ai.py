@@ -40,34 +40,133 @@ TYPE_ORDER = {"DOMAIN-SUFFIX": 0, "DOMAIN": 1, "DOMAIN-KEYWORD": 2}
 DOMAIN_RE = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$")
 KEYWORD_RE = re.compile(r"^[a-z0-9-]{4,}$")
 
-# 分组：按顺序匹配。片段含 "." 时按域名后缀匹配（x.ai 不会误匹配 pplx.ai），否则按子串匹配
+# 分组：按顺序匹配，先命中先归组（越具体的放越前）。
+# 片段含 "." 时按域名后缀匹配（x.ai 不会误匹配 pplx.ai），否则按子串匹配。
+# 输出按 分区 -> "公司 - 服务" 两级注释；新增规则若没命中任何组，会落到最后的"其他"组，记得来这里补。
+S_INTL = "境外 AI 公司"
+S_CN = "中国公司海外 AI（仅海外站）"
 GROUPS = [
-    ("OpenAI / ChatGPT / Sora", ["openai", "chatgpt", "oaistatic", "oaiusercontent", "oaistatsig",
-                                 "sora.com", "chat.com", "crixet", "livekit.cloud", "o33249"]),
-    ("Anthropic / Claude", ["anthropic", "claude", "clau.de", "ant.dev", "antspace"]),
-    ("Google Gemini / AI Studio / NotebookLM / Labs / DeepMind",
-     ["google", "googleapis", "gstatic", "deepmind", "ai.studio", "goog", "makersuite"]),
-    ("xAI / Grok", ["x.ai", "grok"]),
-    ("GitHub Copilot", ["githubcopilot", "copilot-proxy", "copilot-telemetry", "githubnext",
-                        "copilotprodattachments"]),
-    ("Microsoft Copilot / Bing / Azure AI", ["copilot", "bing", "azure"]),
-    ("Meta AI", ["meta.ai", "metaai"]),
-    ("Perplexity", ["perplexity", "pplx"]),
-    ("Mistral / Cohere / AI21 / Inflection", ["mistral", "cohere", "ai21", "pi.ai"]),
-    ("Hugging Face", ["huggingface", "hf.co", "hf.space"]),
-    ("Poe / Character.AI / You.com / Phind", ["poe", "character.ai", "c.ai", "you.com", "phind"]),
-    ("图像 / 视频生成", ["midjourney", "stability", "dreamstudio", "runway", "pika", "lumalabs",
-                    "ideogram", "leonardo", "krea", "civitai", "heygen", "synthesia", "clipdrop",
-                    "openart", "lovart", "magnific", "tripo3d", "novelai", "comfy", "oystermercury"]),
-    ("语音 / 音乐", ["elevenlabs", "suno", "udio.com"]),
-    ("编程助手", ["cursor", "windsurf", "codeium", "jetbrains", "grazie", "devin", "coderabbit",
-               "kiro", "opencode", "qoder", "trae", "marscode", "deepwiki", "typesafe"]),
-    ("推理 / API 平台", ["replicate", "together", "groq", "fireworks", "openrouter", "deepinfra",
-                     "cerebras", "chutes", "gateway.ai.cloudflare.com", "ollama", "lmstudio"]),
-    ("写作 / 翻译 / 办公", ["deepl", "jasper", "gamma.app", "notegpt", "sider"]),
-    ("ByteDance 海外 AI（Coze / Cici / Dola）", ["coze", "cici", "dola"]),
+    (S_INTL, 'OpenAI - Sora', ['sora.com']),
+    (S_INTL, 'Microsoft - Azure AI / Azure OpenAI', ['ai.azure.com', 'openai.azure.com']),
+    (S_INTL, 'OpenAI - ChatGPT', ['chatgpt', 'chat.com', 'oaiusercontent.com', 'oaistatic.com', 'livekit.cloud', 'openai-api.arkoselabs.com', 'o33249']),
+    (S_INTL, 'OpenAI - 官网 / API / 静态资源', ['openai', 'oaistatsig.com', 'crixet.com']),
+    (S_INTL, 'Anthropic - Claude', ['claude', 'clau.de']),
+    (S_INTL, 'Anthropic - 官网 / API', ['anthropic', 'ant.dev', 'antspace.dev']),
+    (S_INTL, 'Google - AI Studio / Gemini API', ['aistudio.google.com', 'ai.studio', 'makersuite.google.com', 'alkali', 'generativelanguage.googleapis.com', 'ai.google.dev', 'generativeai.google']),
+    (S_INTL, 'Google - NotebookLM', ['notebooklm', 'notebook.google', 'notebook.google.com']),
+    (S_INTL, 'Google - Gemini', ['gemini', 'bard.google.com', 'proactivebackend-pa.googleapis.com', 'robinfrontend-pa.googleapis.com', 'geller-pa.googleapis.com']),
+    (S_INTL, 'Google - Labs（Flow / Opal / Stitch）', ['labs.google', 'labs.google.com', 'labstailwind', 'flow.google', 'flow.google.com', 'opal.google', 'opal.google.com', 'stitch.withgoogle.com', 'aisandbox-pa.googleapis.com']),
+    (S_INTL, 'Google - Jules', ['jules.google', 'jules.google.com']),
+    (S_INTL, 'Google - Antigravity', ['antigravity']),
+    (S_INTL, 'Google - Gemini Code Assist', ['cloudaicompanion.googleapis.com', 'cloudcode-pa', 'aicode.googleapis.com']),
+    (S_INTL, 'Google - Vertex AI', ['aiplatform.googleapis.com']),
+    (S_INTL, 'Google - DeepMind', ['deepmind']),
+    (S_INTL, 'Google - 其他 AI 接口', ['aida.googleapis.com']),
+    (S_INTL, 'xAI - Grok', ['grok.com', 'grok.x.com']),
+    (S_INTL, 'xAI - Grokipedia', ['grokipedia.com']),
+    (S_INTL, 'xAI - 官网 / API', ['x.ai']),
+    (S_INTL, 'GitHub - Copilot', ['githubcopilot', 'copilot-proxy', 'copilot-telemetry', 'githubnext', 'copilotprodattachments']),
+    (S_INTL, 'Microsoft - Copilot', ['copilot.microsoft.com', 'copilot.cloud.microsoft', 'copilot.com', 'copilot-stg.com', 'sydney.bing.com', 'edgeservices.bing.com']),
+    (S_INTL, 'Meta - Meta AI', ['meta.ai', 'metaaivm.com']),
+    (S_INTL, 'Perplexity - Perplexity', ['perplexity', 'pplx', 'ppl-ai-file-upload']),
+    (S_INTL, 'Mistral - Le Chat / API', ['mistral.ai']),
+    (S_INTL, 'Cohere - Cohere', ['cohere.ai', 'cohere.com']),
+    (S_INTL, 'AI21 - AI21', ['ai21.com']),
+    (S_INTL, 'Inflection - Pi', ['pi.ai']),
+    (S_INTL, 'Hugging Face - Hugging Face', ['huggingface.co', 'hf.co', 'hf.space']),
+    (S_INTL, 'Quora - Poe', ['poe.com', 'poecdn.net']),
+    (S_INTL, 'Character.AI - Character.AI', ['character.ai', 'c.ai']),
+    (S_INTL, 'You.com - You.com', ['you.com']),
+    (S_INTL, 'Phind - Phind', ['phind.com']),
+    (S_INTL, 'LMArena - Arena', ['arena.ai']),
+    (S_INTL, 'DuckDuckGo - Duck.ai', ['duck.ai']),
+    (S_INTL, 'The Browser Company - Dia', ['diabrowser.com', 'diabrowser.engineering']),
+    (S_INTL, 'Midjourney - Midjourney', ['midjourney.com']),
+    (S_INTL, 'Stability AI - Stability / DreamStudio', ['stability.ai', 'dreamstudio.ai']),
+    (S_INTL, 'Jasper - Jasper / Clipdrop', ['jasper.ai', 'clipdrop.co']),
+    (S_INTL, 'Runway - Runway', ['runwayml.com']),
+    (S_INTL, 'Pika - Pika', ['pika.art']),
+    (S_INTL, 'Luma AI - Dream Machine', ['lumalabs.ai']),
+    (S_INTL, 'Ideogram - Ideogram', ['ideogram.ai']),
+    (S_INTL, 'Leonardo.Ai - Leonardo', ['leonardo.ai']),
+    (S_INTL, 'Krea - Krea', ['krea.ai']),
+    (S_INTL, 'Civitai - Civitai', ['civitai.com']),
+    (S_INTL, 'HeyGen - HeyGen', ['heygen.com']),
+    (S_INTL, 'Synthesia - Synthesia', ['synthesia.io']),
+    (S_INTL, 'OpenArt - OpenArt', ['openart.ai']),
+    (S_INTL, 'Freepik - Magnific', ['magnific.com']),
+    (S_INTL, 'Anlatan - NovelAI', ['novelai.net']),
+    (S_INTL, 'Comfy Org - ComfyUI', ['comfy', 'oystermercury.top']),
+    (S_INTL, 'ElevenLabs - ElevenLabs', ['elevenlabs.io', 'elevenlabs.com']),
+    (S_INTL, 'Suno - Suno', ['suno.com', 'suno.ai']),
+    (S_INTL, 'Udio - Udio', ['udio.com']),
+    (S_INTL, 'Anysphere - Cursor', ['cursor']),
+    (S_INTL, 'Windsurf - Windsurf / Codeium', ['windsurf', 'codeium']),
+    (S_INTL, 'JetBrains - JetBrains AI', ['jetbrains.ai', 'grazie']),
+    (S_INTL, 'Cognition - Devin / DeepWiki', ['devin.ai', 'deepwiki']),
+    (S_INTL, 'CodeRabbit - CodeRabbit', ['coderabbit']),
+    (S_INTL, 'Amazon - Kiro', ['kiro.dev']),
+    (S_INTL, 'SST - OpenCode', ['opencode.ai']),
+    (S_INTL, 'Zed - Agent Client Protocol', ['agentclientprotocol.com']),
+    (S_INTL, 'Replicate - Replicate', ['replicate.com', 'replicate.delivery']),
+    (S_INTL, 'Together AI - Together', ['together.ai', 'together.xyz']),
+    (S_INTL, 'Groq - Groq', ['groq.com']),
+    (S_INTL, 'Fireworks AI - Fireworks', ['fireworks.ai']),
+    (S_INTL, 'OpenRouter - OpenRouter', ['openrouter.ai']),
+    (S_INTL, 'DeepInfra - DeepInfra', ['deepinfra.com']),
+    (S_INTL, 'Cerebras - Cerebras', ['cerebras.ai']),
+    (S_INTL, 'Chutes - Chutes', ['chutes.ai']),
+    (S_INTL, 'Cloudflare - AI Gateway', ['gateway.ai.cloudflare.com']),
+    (S_INTL, 'Ollama - Ollama', ['ollama.com']),
+    (S_INTL, 'Element Labs - LM Studio', ['lmstudio.ai']),
+    (S_INTL, 'LangChain - LangChain', ['langchain.com']),
+    (S_INTL, 'CrewAI - CrewAI', ['crewai.com']),
+    (S_INTL, 'OpenClaw - OpenClaw / ClawHub', ['openclaw.ai', 'clawhub.ai']),
+    (S_INTL, 'LangGenius - Dify', ['dify.ai']),
+    (S_INTL, 'Mintplex Labs - AnythingLLM', ['anythingllm.com']),
+    (S_INTL, 'H2O.ai - H2O.ai', ['h2o.ai']),
+    (S_INTL, 'Mozilla - Mozilla.ai', ['mozilla.ai']),
+    (S_INTL, 'YouMind - YouMind', ['youmind.ai', 'youmind.com', 'youmind.site']),
+    (S_INTL, 'NoteGPT - NoteGPT', ['notegpt.io']),
+    (S_INTL, 'DeepL - DeepL', ['deepl.com']),
+    (S_INTL, 'Gamma - Gamma', ['gamma.app']),
+    (S_CN, 'Moonshot - Kimi intl', ['kimi.ai']),
+    (S_CN, 'Moonshot - API intl', ['moonshot.ai']),
+    (S_CN, 'Kuaishou - Kling intl', ['klingai.com', 'kling.ai']),
+    (S_CN, 'MiniMax - 海外站 / Agent / API', ['minimax.io']),
+    (S_CN, 'MiniMax - Hailuo intl', ['hailuoai.video']),
+    (S_CN, 'MiniMax - Talkie', ['talkie-ai.com']),
+    (S_CN, 'Alibaba - Qwen intl', ['qwen.ai', 'qwenlm.ai']),
+    (S_CN, 'Alibaba - Wan intl', ['wan.video']),
+    (S_CN, 'Alibaba - Tongyi intl', ['tongyi.ai']),
+    (S_CN, 'Alibaba Cloud - Model Studio intl', ['dashscope-intl.aliyuncs.com', 'modelstudio.console.alibabacloud.com']),
+    (S_CN, 'Alibaba - Qoder', ['qoder.com']),
+    (S_CN, 'Zhipu - Z.ai', ['z.ai']),
+    (S_CN, 'ByteDance - Dreamina', ['dreamina.capcut.com']),
+    (S_CN, 'ByteDance - Seed', ['seed.bytedance.com']),
+    (S_CN, 'ByteDance - BytePlus ModelArk', ['bytepluses.com', 'console.byteplus.com']),
+    (S_CN, 'ByteDance - Coze', ['coze.com']),
+    (S_CN, 'ByteDance - Cici / Dola', ['cici.com', 'ciciai.com', 'ciciaicdn.com', 'dola.com']),
+    (S_CN, 'ByteDance - Trae / MarsCode', ['trae.ai', 'marscode.com']),
+    (S_CN, 'Tencent - Hunyuan intl', ['hunyuanglobal.com', 'hunyuan.intl.tencentcloudapi.com']),
+    (S_CN, 'Butterfly Effect - Manus', ['manus.im', 'manuscdn.com', 'manus.space']),
+    (S_CN, 'Butterfly Effect - Monica', ['monica.im']),
+    (S_CN, 'MainFunc - Genspark', ['genspark.ai']),
+    (S_CN, 'Shengshu - Vidu intl', ['vidu.com', 'vidu.studio']),
+    (S_CN, 'AIsphere - PixVerse', ['pixverse.ai']),
+    (S_CN, 'Cloud Whale - PolyBuzz', ['polybuzz.ai']),
+    (S_CN, 'SeaArt - SeaArt', ['seaart.ai']),
+    (S_CN, 'Tensor.Art - Tensor.Art', ['tensor.art']),
+    (S_CN, 'HiDream - Vivago', ['vivago.ai']),
+    (S_CN, 'StepFun - 海外站 / API', ['stepfun.ai']),
+    (S_CN, '01.AI - 海外站 / API', ['01.ai']),
+    (S_CN, 'Kunlun Tech - Skywork', ['skywork.ai']),
+    (S_CN, 'Kunlun Tech - Mureka', ['mureka.ai']),
+    (S_CN, 'VAST - Tripo', ['tripo3d.ai']),
+    (S_CN, 'LiblibAI - Lovart', ['lovart.ai']),
+    (S_CN, 'Sider - Sider', ['sider.ai']),
 ]
-OTHER = "其他境外 AI 服务"
+OTHER = (S_INTL, "其他 - 未分类")
 
 
 def fetch(url):
@@ -161,9 +260,9 @@ def prune(rules):
 
 
 def group_of(v):
-    for name, pats in GROUPS:
+    for sec, name, pats in GROUPS:
         if any((v == p or v.endswith("." + p)) if "." in p else (p in v) for p in pats):
-            return name
+            return (sec, name)
     return OTHER
 
 
@@ -196,7 +295,13 @@ def main():
     grouped = {}
     for t, v in rules:
         grouped.setdefault(group_of(v), []).append((t, v))
-    order = [g for g, _ in GROUPS] + [OTHER]
+    # 输出顺序：分区 -> 公司（按首次出现顺序）-> 服务（按 GROUPS 顺序），与匹配顺序无关
+    company_rank, keyed = {}, []
+    for i, (sec, n, _) in enumerate(GROUPS):
+        company_rank.setdefault(n.split(" - ")[0], i)
+        keyed.append(((0 if sec == S_INTL else 2, company_rank[n.split(" - ")[0]], i), (sec, n)))
+    keyed.append(((1, 0, 0), OTHER))
+    order = [g for _, g in sorted(keyed)]
     for g in grouped:
         grouped[g].sort(key=lambda r: (TYPE_ORDER[r[0]], r[1]))
 
@@ -210,15 +315,21 @@ def main():
         "# 生成脚本: scripts/build_ai.py",
         "# 来源:",
     ] + [f"#   - {n}: {u}" for n, u in used] + ["#   - 手工补充: ai/extra.txt（官方文档 / 实测）",
-                                         "# 排除: ai/exclude.txt（大陆 AI 服务、通用 CDN / 统计 / 支付域名）"]
+                                         "# 排除: ai/exclude.txt（仅大陆站、海内外共用域名，以及通用 CDN / 统计 / 支付域名）"]
 
     yaml_lines = header + ["payload:"]
     list_lines = list(header)
+    cur_sec = None
     for g in order:
         if g not in grouped:
             continue
-        yaml_lines.append(f"  # {g}")
-        list_lines.append(f"# {g}")
+        sec, name = g
+        if sec != cur_sec:
+            cur_sec = sec
+            yaml_lines.append(f"  # ===== {sec} =====")
+            list_lines.append(f"# ===== {sec} =====")
+        yaml_lines.append(f"  # {name}")
+        list_lines.append(f"# {name}")
         for t, v in grouped[g]:
             yaml_lines.append(f"  - {t},{v}")
             list_lines.append(f"{t},{v}")

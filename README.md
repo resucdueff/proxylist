@@ -6,10 +6,12 @@
 
 收录中国大陆以外、在大陆通常需要代理才能访问的 AI 服务域名：OpenAI / ChatGPT / Sora、Anthropic / Claude、Google Gemini / AI Studio / NotebookLM / Labs / DeepMind、xAI / Grok、Microsoft Copilot、GitHub Copilot、Meta AI、Perplexity、Mistral、Cohere、Hugging Face、Poe、Character.AI、Midjourney、Stability、Runway、Pika、Luma、Ideogram、Leonardo、ElevenLabs、Suno、Udio、Cursor、Windsurf、Replicate、Together、Groq、Fireworks、OpenRouter、DeepL、Jasper 等。
 
-- 不含国内 AI 服务（DeepSeek、Kimi、豆包、通义千问、智谱、文心等），它们应直连。
+- 包含中国 AI 公司的**海外站**（如 Kimi 国际版 kimi.ai、Kling 国际版、海螺海外版、Qwen 国际版 chat.qwen.ai、Z.ai、Dreamina、BytePlus ModelArk、Manus、Genspark、Vidu、PixVerse 等），单独分在「中国公司海外 AI」区。
+- 不含仅大陆站或海内外共用的域名（如 deepseek.com、kimi.com、豆包、通义、智谱 bigmodel.cn、文心等），它们应直连。
 - 不含 google.com、googleapis.com、microsoft.com、cloudflare.com 之类被大量普通网站共用的整域名，只收录 AI 专用的子域名（如 `gemini.google.com`、`generativelanguage.googleapis.com`、`copilot.microsoft.com`）。
 - 只使用 `DOMAIN-SUFFIX` / `DOMAIN` / `DOMAIN-KEYWORD`（关键字仅 `openai`、`anthropic`），不含 IP 规则。
-- 当前规则数：231，每周自动更新。
+- 当前规则数：264，每周自动更新。
+- 文件内按「分区 → 公司 - 服务」两级注释分组（如 `# OpenAI - ChatGPT`、`# Google - Gemini`、`# Moonshot - Kimi intl`）。
 
 ### 规则地址
 
