@@ -157,3 +157,72 @@ rules:
 - Apple 支持文档 [101555](https://support.apple.com/zh-cn/101555)（在企业网络中使用 Apple 产品）
 - [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) `apple-intelligence`（MetaCubeX geosite `apple-intelligence`）
 - [SukkaW/Surge](https://github.com/SukkaW/Surge) `apple_intelligence`
+
+## github / linux / docker：开发常用境外源
+
+三个规则集收录在国内直连打不开或速度很差的开发相关域名，手工维护，由 `scripts/build_dev.py` 生成（不参与每周自动更新）。文件内同样按「分区 → 公司 - 服务」两级注释分组。
+
+| 规则集 | 条数 | 内容 |
+| --- | --- | --- |
+| `github` | 50 | github.com、githubusercontent.com（raw / Release / 头像）、githubassets.com、github.io、github.dev、ghcr.io、ghe.com、Release / LFS 的 S3 存储、Actions 日志 Blob、状态页 / 博客等 |
+| `linux` | 40 | **Alpine 官方源**（alpinelinux.org，含 dl-cdn）、Debian、Ubuntu / Launchpad PPA / Snap、Kali、Mint、树莓派、Armbian、Proxmox、Fedora / EPEL / Copr、RHEL CDN、CentOS、Rocky、Alma、Oracle Linux、Arch / AUR / ArchARM、Manjaro、openSUSE、Gentoo、NixOS / Cachix、Void、kernel.org、Flathub |
+| `docker` | 20 | Docker Hub（docker.io、docker.com、镜像层 CDN / R2）、registry.k8s.io / k8s.io、gcr.io、pkg.dev、Helm、ghcr.io、Quay、Red Hat Registry、ECR Public、NVIDIA NGC、Elastic、GitLab Registry |
+
+说明：
+
+- 只收录境外官方源，清华 TUNA、中科大 USTC、阿里云等国内镜像站继续直连。
+- Copilot 相关域名在 `ai` 规则集里，`github` 不重复收录；想让 Copilot 走 AI 分组，把 `RULE-SET,ai` 放在 `RULE-SET,github` 前面。
+- `ghcr.io` 在 `github` 和 `docker` 里都有，方便单独使用。
+- Fedora / CentOS / Rocky / Alma / openSUSE / Arch 的 mirrorlist 会按出口 IP 分配镜像，走代理后可能分到海外第三方镜像，这类发行版更推荐直接换国内镜像源。
+
+### 规则地址
+
+| 规则集 | YAML（`format: yaml`） | 纯文本（`format: text`） |
+| --- | --- | --- |
+| github | https://raw.githubusercontent.com/resucdueff/proxylist/main/github/github.yaml | https://raw.githubusercontent.com/resucdueff/proxylist/main/github/github.list |
+| linux | https://raw.githubusercontent.com/resucdueff/proxylist/main/linux/linux.yaml | https://raw.githubusercontent.com/resucdueff/proxylist/main/linux/linux.list |
+| docker | https://raw.githubusercontent.com/resucdueff/proxylist/main/docker/docker.yaml | https://raw.githubusercontent.com/resucdueff/proxylist/main/docker/docker.list |
+
+### mihomo 配置示例
+
+```yaml
+rule-providers:
+  github:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/resucdueff/proxylist/main/github/github.yaml
+    path: ./ruleset/github.yaml
+    interval: 86400
+  linux:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/resucdueff/proxylist/main/linux/linux.yaml
+    path: ./ruleset/linux.yaml
+    interval: 86400
+  docker:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://raw.githubusercontent.com/resucdueff/proxylist/main/docker/docker.yaml
+    path: ./ruleset/docker.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,ai,AI           # 如果也用了 ai 规则集，放在最前
+  - RULE-SET,github,代理
+  - RULE-SET,linux,代理
+  - RULE-SET,docker,代理
+  # ... GEOSITE / GEOIP,CN,DIRECT 等
+  - MATCH,DIRECT
+```
+
+> 提示：规则集本身托管在 raw.githubusercontent.com，首次下载如果失败，可以给 rule-provider 加 `proxy: 代理`。
+
+### 重新生成
+
+```bash
+python3 scripts/build_dev.py   # 改 RULESETS 里的域名后运行
+git diff github/ linux/ docker/
+```

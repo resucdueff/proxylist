@@ -1,0 +1,49 @@
+# 名称: docker（Docker Hub 及常用境外容器镜像仓库、Kubernetes 官方源）
+# 更新时间: 2026-10-25 23:32:07 (Asia/Shanghai, UTC+8)
+# 规则数: 20
+# 仓库: https://github.com/resucdueff/proxylist
+# 维护方式: 手工整理，由 scripts/build_dev.py 生成，不参与 scripts/build_ai.py 自动合并
+# 来源:
+#   - v2fly/domain-list-community data/docker、kubernetes: https://github.com/v2fly/domain-list-community/blob/master/data/docker
+#   - Docker 文档 Allowlist for Docker Desktop / Docker Hub: https://docs.docker.com/desktop/setup/allow-list/
+#   - Kubernetes registry.k8s.io 说明: https://github.com/kubernetes/registry.k8s.io
+# 说明: ghcr.io 与 github 规则集重复收录，方便单独使用
+#       registry.k8s.io 会把镜像层重定向到 AWS S3 / Google Artifact Registry 等地址，S3 部分未收录（域名按区域变化），如拉取仍慢可开 sniffer 观察后自行补充
+#       未收录 mcr.microsoft.com（微软镜像仓库国内直连通常可用），需要时自行加 DOMAIN-SUFFIX,mcr.microsoft.com
+# ===== Docker =====
+# Docker - Docker Hub 镜像仓库（registry-1 / auth / index.docker.io）
+DOMAIN-SUFFIX,docker.io
+# Docker - 官网 / Hub 网页 / 镜像层 CDN production.cloudflare / download.docker.com 安装源 / Desktop / 登录
+DOMAIN-SUFFIX,docker.com
+DOMAIN-SUFFIX,dockerstatic.com
+# Docker - 镜像层存储（Cloudflare R2）
+DOMAIN,docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com
+# Docker - Compose 规范
+DOMAIN-SUFFIX,compose-spec.io
+# ===== Kubernetes =====
+# Kubernetes - registry.k8s.io / dl.k8s.io / pkgs.k8s.io / 官网
+DOMAIN-SUFFIX,k8s.io
+DOMAIN-SUFFIX,kubernetes.io
+# Google - Container Registry（gcr.io、k8s.gcr.io）/ Artifact Registry（*-docker.pkg.dev）
+DOMAIN-SUFFIX,gcr.io
+DOMAIN-SUFFIX,pkg.dev
+# Helm - get.helm.sh / Artifact Hub
+DOMAIN-SUFFIX,helm.sh
+DOMAIN-SUFFIX,artifacthub.io
+# ===== 其他镜像仓库 =====
+# GitHub - Container Registry（GHCR）
+DOMAIN-SUFFIX,ghcr.io
+# Red Hat - Quay.io
+DOMAIN-SUFFIX,quay.io
+DOMAIN,quay-registry.s3.amazonaws.com
+# Red Hat - registry.redhat.io / registry.access.redhat.com
+DOMAIN-SUFFIX,redhat.io
+DOMAIN,registry.access.redhat.com
+# AWS - ECR Public
+DOMAIN-SUFFIX,public.ecr.aws
+# NVIDIA - NGC（nvcr.io）
+DOMAIN-SUFFIX,nvcr.io
+# Elastic - docker.elastic.co
+DOMAIN,docker.elastic.co
+# GitLab - Container Registry
+DOMAIN,registry.gitlab.com

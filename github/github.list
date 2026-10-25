@@ -1,0 +1,81 @@
+# 名称: github（GitHub 全家：网页、Git、Raw、Release、Pages、Actions、GHCR）
+# 更新时间: 2026-10-25 23:32:07 (Asia/Shanghai, UTC+8)
+# 规则数: 50
+# 仓库: https://github.com/resucdueff/proxylist
+# 维护方式: 手工整理，由 scripts/build_dev.py 生成，不参与 scripts/build_ai.py 自动合并
+# 来源:
+#   - v2fly/domain-list-community data/github: https://github.com/v2fly/domain-list-community/blob/master/data/github
+#   - GitHub 文档 About GitHub's IP addresses / 网络白名单: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses
+# 说明: Copilot 相关（githubcopilot.com、copilot-*.githubusercontent.com、copilot-workspace.githubnext.com）已在 ai 规则集，未重复收录；
+#         需要 Copilot 走 AI 分组时，把 RULE-SET,ai 放在 RULE-SET,github 前面
+#       ghcr.io 同时收录在 docker 规则集（单独使用 docker 时也能拉 GHCR 镜像）
+# ===== GitHub 主站 =====
+# GitHub - 网页 / API / Git (HTTPS) / codeload 源码包
+DOMAIN-SUFFIX,github.com
+# GitHub - Raw / Release 下载 / 头像 / 附件（raw、objects、release-assets、avatars、camo、user-images、media）
+DOMAIN-SUFFIX,githubusercontent.com
+# GitHub - 静态资源（github.githubassets.com）
+DOMAIN-SUFFIX,githubassets.com
+# GitHub - 桌面端 / 内部服务
+DOMAIN-SUFFIX,githubapp.com
+# GitHub - Pages
+DOMAIN-SUFFIX,github.io
+# GitHub - Codespaces / github.dev 网页编辑器
+DOMAIN-SUFFIX,github.dev
+DOMAIN-SUFFIX,githubpreview.dev
+# GitHub - 企业版云（数据驻留，*.ghe.com）
+DOMAIN-SUFFIX,ghe.com
+# GitHub - 短链接
+DOMAIN-SUFFIX,gh.io
+DOMAIN-SUFFIX,git.io
+DOMAIN-SUFFIX,repo.new
+# GitHub - 注册 / 登录人机验证
+DOMAIN-SUFFIX,octocaptcha.com
+DOMAIN,github-api.arkoselabs.com
+# ===== GitHub 存储与 CDN =====
+# GitHub - Release / LFS / 附件存储（AWS S3）
+DOMAIN,github-cloud.s3.amazonaws.com
+DOMAIN,github-production-release-asset-2e65be.s3.amazonaws.com
+DOMAIN,github-production-repository-file-5c1aeb.s3.amazonaws.com
+DOMAIN,github-production-repository-image-32fea6.s3.amazonaws.com
+DOMAIN,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+DOMAIN,github-production-user-asset-6210df.s3.amazonaws.com
+# GitHub - Actions 日志 / 产物（Azure Blob）
+DOMAIN,productionresultssa0.blob.core.windows.net
+DOMAIN,productionresultssa1.blob.core.windows.net
+DOMAIN,productionresultssa2.blob.core.windows.net
+DOMAIN,productionresultssa3.blob.core.windows.net
+DOMAIN,productionresultssa4.blob.core.windows.net
+DOMAIN,productionresultssa5.blob.core.windows.net
+DOMAIN,productionresultssa6.blob.core.windows.net
+DOMAIN,productionresultssa7.blob.core.windows.net
+DOMAIN,productionresultssa8.blob.core.windows.net
+DOMAIN,productionresultssa9.blob.core.windows.net
+DOMAIN,productionresultssa10.blob.core.windows.net
+DOMAIN,productionresultssa11.blob.core.windows.net
+DOMAIN,productionresultssa12.blob.core.windows.net
+DOMAIN,productionresultssa13.blob.core.windows.net
+DOMAIN,productionresultssa14.blob.core.windows.net
+DOMAIN,productionresultssa15.blob.core.windows.net
+DOMAIN,productionresultssa16.blob.core.windows.net
+DOMAIN,productionresultssa17.blob.core.windows.net
+DOMAIN,productionresultssa18.blob.core.windows.net
+DOMAIN,productionresultssa19.blob.core.windows.net
+# GitHub - Fastly CDN 入口
+DOMAIN,github.global.ssl.fastly.net
+DOMAIN,github.map.fastly.net
+# ===== GitHub 容器 / 包 =====
+# GitHub - Container Registry（GHCR）
+DOMAIN-SUFFIX,ghcr.io
+# ===== GitHub 周边站点 =====
+# GitHub - 状态页 / 博客 / 社区 / 支持
+DOMAIN-SUFFIX,githubstatus.com
+DOMAIN-SUFFIX,github.blog
+DOMAIN-SUFFIX,github.community
+DOMAIN-SUFFIX,githubsupport.com
+# GitHub - Next 实验项目 / Universe 大会 / 开源指南
+DOMAIN-SUFFIX,githubnext.com
+DOMAIN-SUFFIX,githubuniverse.com
+DOMAIN-SUFFIX,opensource.guide
+# GitHub - Dependabot
+DOMAIN-SUFFIX,dependabot.com
