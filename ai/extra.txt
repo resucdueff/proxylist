@@ -165,3 +165,11 @@ DOMAIN-SUFFIX,stepfun.ai
 DOMAIN-SUFFIX,01.ai
 DOMAIN-SUFFIX,skywork.ai
 DOMAIN-SUFFIX,mureka.ai
+
+# 个人 AI 助手 / 工具（2026-10 新增）
+# Wabi：Replika 创始人做的多人协作个人 AI 助手
+DOMAIN-SUFFIX,wabi.ai
+# Instinct：个人 AI 助手（邀请制，短信/电话/WhatsApp）
+DOMAIN-SUFFIX,instinct.com
+# Ancher：语义收藏与查找内容的 AI 工具
+DOMAIN-SUFFIX,ancher.ai

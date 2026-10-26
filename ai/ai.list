@@ -1,6 +1,6 @@
 # 名称: ai（中国大陆境外 AI 服务域名）
-# 更新时间: 2026-10-24 20:33:19 (Asia/Shanghai, UTC+8)
-# 规则数: 264
+# 更新时间: 2026-10-26 21:26:51 (Asia/Shanghai, UTC+8)
+# 规则数: 268
 # 仓库: https://github.com/resucdueff/proxylist
 # 生成脚本: scripts/build_ai.py
 # 来源:
@@ -307,7 +307,10 @@ DOMAIN-SUFFIX,deepl.com
 DOMAIN-SUFFIX,gamma.app
 # 其他 - 未分类
 DOMAIN-SUFFIX,ai.com
+DOMAIN-SUFFIX,ancher.ai
 DOMAIN-SUFFIX,dreamgen.com
+DOMAIN-SUFFIX,instinct.com
+DOMAIN-SUFFIX,muse.ai
 DOMAIN-SUFFIX,openspec.dev
 DOMAIN-SUFFIX,plannotator.ai
 DOMAIN-SUFFIX,spicywriter.com
@@ -315,6 +318,7 @@ DOMAIN-SUFFIX,syntx.ai
 DOMAIN-SUFFIX,talkai.info
 DOMAIN-SUFFIX,tapnow.ai
 DOMAIN-SUFFIX,typesafe.ai
+DOMAIN-SUFFIX,wabi.ai
 # ===== 中国公司海外 AI（仅海外站） =====
 # Moonshot - Kimi intl
 DOMAIN-SUFFIX,kimi.ai
