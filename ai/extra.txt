@@ -173,3 +173,11 @@ DOMAIN-SUFFIX,wabi.ai
 DOMAIN-SUFFIX,instinct.com
 # Ancher：语义收藏与查找内容的 AI 工具
 DOMAIN-SUFFIX,ancher.ai
+
+# AI 视频 / 世界模型 / 开发工具（2026-11 新增）
+# Runway：新域名（原 runwayml.com）
+DOMAIN-SUFFIX,runway.com
+# SpAItial：Echo-3 世界模型
+DOMAIN-SUFFIX,spaitial.ai
+# Heal：AI 自动找 bug 工具
+DOMAIN-SUFFIX,heal.dev
