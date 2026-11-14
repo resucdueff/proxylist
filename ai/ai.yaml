@@ -1,6 +1,6 @@
 # 名称: ai（中国大陆境外 AI 服务域名）
-# 更新时间: 2026-11-03 07:36:28 (Asia/Shanghai, UTC+8)
-# 规则数: 280
+# 更新时间: 2026-11-14 19:25:03 (Asia/Shanghai, UTC+8)
+# 规则数: 283
 # 仓库: https://github.com/resucdueff/proxylist
 # 生成脚本: scripts/build_ai.py
 # 来源:
@@ -314,6 +314,7 @@ payload:
   - DOMAIN-SUFFIX,commandcode.ai
   - DOMAIN-SUFFIX,context7.com
   - DOMAIN-SUFFIX,dreamgen.com
+  - DOMAIN-SUFFIX,grokbot.com
   - DOMAIN-SUFFIX,heal.dev
   - DOMAIN-SUFFIX,instinct.com
   - DOMAIN-SUFFIX,metaaiusercontent.com
@@ -332,6 +333,8 @@ payload:
   - DOMAIN,appsgenaiserver-pa.clients.google.com
   - DOMAIN,appsgenaiserver-pa.clients6.google.com
   - DOMAIN,appsgenaiserver-pa.googleapis.com
+  - DOMAIN,o1158394.ingest.us.sentry.io
+  - DOMAIN,production-copilot-host-westus.webpubsub.azure.com
   # ===== 中国公司海外 AI（仅海外站） =====
   # Moonshot - Kimi intl
   - DOMAIN-SUFFIX,kimi.ai

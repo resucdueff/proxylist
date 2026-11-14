@@ -40,6 +40,8 @@ DOMAIN-SUFFIX,stitch.withgoogle.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,grok.x.com
+# Grok Bot
+DOMAIN-SUFFIX,grokbot.com
 
 # Microsoft Copilot / Bing Chat / Azure AI
 DOMAIN-SUFFIX,copilot.microsoft.com
@@ -49,6 +51,9 @@ DOMAIN,sydney.bing.com
 DOMAIN-SUFFIX,edgeservices.bing.com
 DOMAIN-SUFFIX,ai.azure.com
 DOMAIN-SUFFIX,openai.azure.com
+# Copilot 实时通信（Azure WebPubSub）与错误上报（Sentry）
+DOMAIN,production-copilot-host-westus.webpubsub.azure.com
+DOMAIN,o1158394.ingest.us.sentry.io
 
 # GitHub Copilot
 DOMAIN-SUFFIX,githubcopilot.com
