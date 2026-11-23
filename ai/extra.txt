@@ -34,6 +34,8 @@ DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,jules.google
 DOMAIN-SUFFIX,antigravity.google
+# Google Antigravity（关键字，匹配面较宽，已确认）
+DOMAIN-KEYWORD,antigravity
 DOMAIN-SUFFIX,stitch.withgoogle.com
 
 # xAI / Grok
@@ -109,6 +111,8 @@ DOMAIN-SUFFIX,openart.ai
 # 语音 / 音乐
 DOMAIN-SUFFIX,elevenlabs.io
 DOMAIN-SUFFIX,elevenlabs.com
+# ElevenLabs 用户内容域名（v2fly 社区列表）
+DOMAIN-SUFFIX,elevenlabsusercontent.com
 DOMAIN-SUFFIX,suno.com
 DOMAIN-SUFFIX,suno.ai
 DOMAIN-SUFFIX,udio.com
@@ -186,3 +190,6 @@ DOMAIN-SUFFIX,runway.com
 DOMAIN-SUFFIX,spaitial.ai
 # Heal：AI 自动找 bug 工具
 DOMAIN-SUFFIX,heal.dev
+
+# Proton Lumo（仅专用子域，不含邮箱 / VPN 等其他 Proton 服务）
+DOMAIN-SUFFIX,lumo.proton.me
