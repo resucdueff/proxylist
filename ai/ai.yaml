@@ -1,6 +1,6 @@
 # 名称: ai（中国大陆境外 AI 服务域名）
-# 更新时间: 2026-11-14 19:25:03 (Asia/Shanghai, UTC+8)
-# 规则数: 283
+# 更新时间: 2026-11-23 09:38:50 (Asia/Shanghai, UTC+8)
+# 规则数: 286
 # 仓库: https://github.com/resucdueff/proxylist
 # 生成脚本: scripts/build_ai.py
 # 来源:
@@ -119,6 +119,7 @@ payload:
   - DOMAIN-SUFFIX,antigravity.google
   - DOMAIN,antigravity-pa.googleapis.com
   - DOMAIN,antigravity.googleapis.com
+  - DOMAIN-KEYWORD,antigravity
   # Google - Gemini Code Assist
   - DOMAIN-SUFFIX,aicode.googleapis.com
   - DOMAIN,cloudaicompanion.googleapis.com
@@ -224,6 +225,7 @@ payload:
   # ElevenLabs - ElevenLabs
   - DOMAIN-SUFFIX,elevenlabs.com
   - DOMAIN-SUFFIX,elevenlabs.io
+  - DOMAIN-SUFFIX,elevenlabsusercontent.com
   # Suno - Suno
   - DOMAIN-SUFFIX,suno.ai
   - DOMAIN-SUFFIX,suno.com
@@ -306,6 +308,8 @@ payload:
   - DOMAIN-SUFFIX,deepl.com
   # Gamma - Gamma
   - DOMAIN-SUFFIX,gamma.app
+  # Proton - Lumo
+  - DOMAIN-SUFFIX,lumo.proton.me
   # 其他 - 未分类
   - DOMAIN-SUFFIX,ai.com
   - DOMAIN-SUFFIX,ancher.ai
